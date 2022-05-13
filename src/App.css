@@ -13,10 +13,33 @@ body {
 .all-data {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
-  width: 80%;
   margin: auto;
 }
-.main{
+
+.profiler {
+  width: 100%;
+  border: 2px solid black;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+.profiler-documents {
+  height: 40%;
+  width: 100%;
+}
+.profiler-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 30%;
+}
+.updateStatus {
+  display: flex;
+  height: 20%;
+}
+
+.main {
   display: flex;
 }
 .container {
@@ -26,14 +49,13 @@ body {
 
 .sidebar {
   height: 100%;
-  width: 60%;
+  width: 100%;
   background: #fff;
   padding: 10px 10px;
   align-items: center;
   color: black;
   border: 1px solid #111011;
   margin-left: -25px;
-  
 }
 
 .nav-list {
@@ -42,15 +64,14 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
- 
 }
-.modal-content{
+.modal-content {
   width: 600px;
 }
- .modal-body{
-   width: 600px;
- }
- /*.logo {
+.modal-body {
+  width: 600px;
+}
+/*.logo {
   color: #111011;
   display: flex;
   height: 50px;
@@ -77,7 +98,7 @@ body {
   list-style: none;
   width: 100%;
   height: 3rem;
- 
+
   /* border-radius: 12px; */
 }
 .sidebar ul li a {
@@ -85,7 +106,6 @@ body {
   text-decoration: none;
   display: flex;
   justify-content: flex-start;
-
 }
 .sidebar ul li a i {
   width: 40%;
@@ -95,22 +115,19 @@ body {
 }
 .sidebar ul li a span {
   width: 230%;
-  
 }
 
 .row {
   display: flex;
   padding: 2px;
   justify-content: space-between;
-  font-weight: bold;  
-  
+  font-weight: bold;
 }
 .row1 {
   display: flex;
   padding: 2px;
   justify-content: space-between;
-  font-weight: bold;  
-  
+  font-weight: bold;
 }
 .row2 {
   display: grid;
@@ -120,11 +137,10 @@ body {
   font-weight: bold;
 }
 
-
- .appbtn{
+.appbtn {
   display: flex;
   align-items: center;
-  justify-content:center ;
+  justify-content: center;
   height: 25px;
   max-width: 100px;
   width: 100%;
@@ -132,23 +148,23 @@ body {
   border-radius: 5px;
   outline: none;
   color: #fff;
-  background-color: 	#A9A9A9;
+  background-color: #a9a9a9;
   margin: 24px 150px;
   transition: all 0.3s linear;
   cursor: pointer;
   float: left;
 }
 
-.appbtn:hover{
-background-color: #6495ED;
+.appbtn:hover {
+  background-color: #6495ed;
 }
-.disappbtn:hover{
-background-color: #6495ED;
+.disappbtn:hover {
+  background-color: #6495ed;
 }
-.button{
-display: flex;
-align-items: center;
-float: left;
+.button {
+  display: flex;
+  align-items: center;
+  float: left;
 }
 
 .txt {
@@ -169,10 +185,9 @@ float: left;
   color: rgb(135, 134, 134);
   font-weight: bold;
   margin: 15px 10px;
-  
 }
 .txt3 {
-  display:grid;
+  display: grid;
   padding: 5px;
   font-size: 20px;
   justify-content: space-between;
@@ -180,10 +195,10 @@ float: left;
   padding-top: 10px;
   margin: 15px 20px;
 }
-.btn{
+.btn {
   display: flex;
   align-items: center;
-  justify-content:center ;
+  justify-content: center;
   height: 20px;
   max-width: 100px;
   width: 100%;
@@ -191,23 +206,22 @@ float: left;
   border-radius: 5px;
   outline: none;
   color: #fff;
-  background-color: 	#A9A9A9;
+  background-color: #a9a9a9;
   margin: 8px 30px;
   transition: all 0.3s linear;
   cursor: pointer;
-  
 }
-.btn:hover{
-  background-color: #6495ED;
+.btn:hover {
+  background-color: #6495ed;
 }
 
-.lefty{
-  width: 30%;
+.lefty {
+  width: 20%;
 }
-.righty{
-  width: 70%;
+.righty {
+  width: 80%;
 }
-.txty{
+.txty {
   display: flex;
   justify-content: space-between;
   padding: 5px;

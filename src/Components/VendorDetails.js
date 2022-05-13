@@ -1,190 +1,206 @@
-import React from "react";
 import SideNav from "./SideNav";
+import { React, useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 function VendorDetails() {
+  const history = useNavigate();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const [vendorinfo, setVendorinfo] = useState([]);
+  useEffect(async (e) => {
+    if (!userInfo) {
+      history("/");
+    }
+    const config = {
+      headers: {
+        authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.get(`/api/admin/viewVendors`, config);
+    setVendorinfo(data.vendors);
+  }, []);
   return (
-   <div className="main">
-    <div className="lefty">
-     <SideNav />
-     </div>
-   <div className="righty">
-        <div className="all-data">
-            <div className="data-container">
-    <div className="row">
-       
-        <div className="column">
-            <span className="txt">Vendor </span>
-            <span className="txt1">Vinit Roy</span>
-            <span className="txt1">Rahul Shaw</span>
-            <span className="txt1">Karan Jain</span>
-            <span className="txt1">Manpreet</span>
+    <div className="main">
+      <div className="lefty">
+        <SideNav />
+      </div>
+      {/* all-data */}
+      <div className="righty  page-content page-container" id="page-content">
+        {/* <div class="padding"> */}
+        <div class="row container d-flex justify-content-center">
+          {/* <div class="col-lg-8 grid-margin stretch-card"> */}
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Customer Details</h4>
+              <p class="card-description">Basic table with card</p>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID No.</th>
+                      <th>Store Name</th>
+                      <th>E-Mail</th>
+                      <th>Phone No.</th>
+
+                      <th>Category</th>
+                      <th>Created On</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {vendorinfo.map((ele) => {
+                      return (
+                        <tr>
+                          <td>{ele._id}</td>
+                          <td>{ele.storeName}</td>
+                          <td>{ele.email}</td>
+                          <td>{ele.phoneNo}</td>
+                          <td>{ele.categories}</td>
+                          <td>12 May 2017</td>
+                          <td>
+                            <label class="badge badge-danger">Pending</label>
+                          </td>
+                          <td>
+                            <button
+                              class="badge badge-danger"
+                              onClick={() => {
+                                localStorage.setItem(
+                                  "vendorInfo",
+                                  JSON.stringify(ele)
+                                );
+                                // history("/vendorInfo");
+                              }}
+                            >
+                              View Documents
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                    <tr>
+                      <td>7459658214</td>
+                      <td>Samso Park</td>
+                      <td>samso@example.com</td>
+                      <td>5825415689</td>
+                      <td>Vegetables & Fruits </td>
+                      <td>12 May 2017</td>
+                      <td>
+                        <label class="badge badge-warning">In progress</label>
+                      </td>
+                      <td>
+                        <button class="badge badge-danger">Approve</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>7459658214</td>
+                      <td>Samso Park</td>
+                      <td>samso@example.com</td>
+                      <td>5825415689</td>
+                      <td>Vegetables & Fruits </td>
+                      <td>12 May 2017</td>
+                      <td>
+                        <label class="badge badge-info">Fixed</label>
+                      </td>
+                      <td>
+                        <button class="badge badge-danger">Approve</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>7459658214</td>
+                      <td>Samso Park</td>
+                      <td>samso@example.com</td>
+                      <td>5825415689</td>
+                      <td>Vegetables & Fruits </td>
+                      <td>12 May 2017</td>
+                      <td>
+                        <label class="badge badge-success">Completed</label>
+                      </td>
+                      <td>
+                        <button class="badge badge-danger">Approve</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>7459658214</td>
+                      <td>Samso Park</td>
+                      <td>samso@example.com</td>
+                      <td>5825415689</td>
+                      <td>Vegetables & Fruits </td>
+                      <td>12 May 2017</td>
+                      <td>
+                        <label class="badge badge-warning">In progress</label>
+                      </td>
+                      <td>
+                        <button class="badge badge-danger">Approve</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-    
-       
-        <div className="column">
-            <span className="txt">Store Name</span>
-            <span className="txt1">Vinit store</span>
-            <span className="txt1">Rahul Store</span>
-            <span className="txt1">Karan Store</span>
-            <span className="txt1">Manu Store</span>
-        </div>
-        <div className="column">
-            <span className="txt">Address</span>
-            <span className="txt1">Shyam Residency, A-206, Surat, Gujrat, India</span>
-            <span className="txt1">Shyam Residency, A-206, Surat, Gujrat, India</span>
-            <span className="txt1">Shyam Residency, A-206, Surat, Gujrat, India</span>
-            <span className="txt1">Shyam Residency, A-206, Surat, Gujrat, India</span>
-        </div>
-        <div className="column">
-            <span className="txt">Phone</span>
-            <span className="txt1">87936547855</span>
-            <span className="txt1">87936547855</span>
-            <span className="txt1">87936547855</span>
-            <span className="txt1">87936547855</span>
-        </div>
-        <div className="column">
-            <span className="txt">Status</span>
-            <div className="column1">
-            <button className="btn">
-                <span className="btnText">Approved</span>
+      </div>
+      <div
+        className="modal fade"
+        id="storeinfo"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLongTitle">
+                Terms of Use
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
               </button>
             </div>
-              <div className="column1">
-                <button className="btn">
-                    <span className="btnText">Approved</span>
-                  </button>
-                </div>
-                  <div className="column1">
-                    <button className="btn">
-                        <span className="btnText">Approved</span>
-                      </button>
-                      </div>
-                      <div className="column1">
-                        <button className="btn">
-                            <span className="btnText">Approved</span>
-                          </button>
-                          </div>
-                     
-        </div>
-        <div className="column">
-            <span className="txt">Status</span>
-            <div className="column1">
-              <button type="button" className="btn" data-toggle="modal" data-target="#vendor">
-               <span className="btnText"> Click Here</span>
-            </button>
+            <div className="modal-body">
+              <div className="txt">
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book. It has survived not only five centuries, but
+                  also the leap into electronic typesetting, remaining
+                  essentially unchanged.
+                </p>
+              </div>
             </div>
-            <div className="column1">
-                <button className="btn">
-                    <span className="btnText">Click Here</span>
-                  </button>
-                </div>
-                <div className="column1">
-                    <button className="btn">
-                        <span className="btnText">Click Here</span>
-                      </button>
-                    </div>
-                    <div className="column1">
-                        <button className="btn">
-                            <span className="btnText">Click Here</span>
-                          </button>
-                        </div>
-    
-        </div>
-    
-    </div>
-    
-    
+
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLongTitle">
+                Company Policy
+              </h5>
             </div>
-        </div>
-        <div class="modal fade" id="vendor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-        aria-hidden="true">
-        <div className="modal-dialog" role="document">
-            <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title" id="vendor">Vendor Details</h5>
-    
-                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div className="modal-body">
-                    
-                        <div className="data-container">
-                          <div className="row">
-                            <div className="column">
-                              
-                                <span className="txt3">Name</span>
-                                <span className="txt3">Store</span>
-                                <span className="txt3">Phone </span>
-                                <span className="txt3">Email</span>
-                                <span className="txt3">Liscense</span>
-                                <span className="txt3">GST</span>
-                                <span className="txt3">Aadhar</span>
-                                <span className="txt3">PAN</span>
-                                <span className="txt3">Type</span>
-                                
-                              
-                            </div>
-                          
-                              <div className="column">
-                                
-                                  <span className="txt1">Rohit Kumar</span>
-                                  <span className="txt1">RK Store</span>
-                                  <span className="txt1">7452167894</span>
-                                  <span className="txt1">rk.singh@gmail.com</span>
-                                  <span className="txt1">245137798545</span>
-                                  <span className="txt1">41357123654875</span>
-                                  <span className="txt1">95714465883214</span>
-                                  <span className="txt1">ADE4515EF78</span>
-                                  <span className="txt1">Seller</span>
-                                 
-                             
-                              </div>
-                              
-                            <div className="row">
-                              <div className="column">
-                               
-                                  <span className="txt3">UPI Id</span>
-                                  <span className="txt3">Manager</span>
-                                  <span className="txt3">WhatsappUpdate</span>
-                                  <span className="txt3">Categories</span>
-                                  <span className="txt3">Services</span>
-                                  <span className="txt3">Active</span>
-                                  <span className="txt3">Document</span>
-                                  <span className="txt3">Cancelleed-Cheque</span>
-                                  <span className="txt3">Aadhar Front</span>
-                                  <span className="txt3">Aadhar Back</span>
-                                  <span className="txt3">PAN Upload</span>
-                             
-                              </div>
-                              <div className="column">
-                               
-                                  <span className="txt1">564565341</span>
-                                  <span className="txt1">Owner</span>
-                                  <span className="txt1">true</span>
-                                  <span className="txt1">Vegetable</span>
-                                  <span className="txt1">Home Delivery</span>
-                                  <span className="txt1">True</span>
-                                  <span className="txt1">Uploads/docs/abc.jpg</span>
-                                  <span className="txt1">Uploads/docs/abc.jpg</span>
-                                  <span className="txt1">Uploads/docs/abc.jpg</span>
-                                  <span className="txt1">Uploads/docs/abc.jpg</span>
-                                  <span className="txt1">Uploads/docs/abc.jpg</span>
-                              
-                              </div>
-                            </div>
-                    
-                          </div>
-                    
-                        </div>
-                      
-                </div>
-              
+            <div className="modal-body">
+              <div className="txt">
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </p>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    </div>
-    </div>
+    // </div>
+    // </div>
   );
 }
 
