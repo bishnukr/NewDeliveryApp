@@ -33,32 +33,41 @@ function VendorDetails() {
         <div class="row container d-flex justify-content-center">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Customer Details</h4>
-              <p class="card-description">Basic table with card</p>
+              <h4
+                class="card-title"
+                style={{
+                  fontWeight: "900",
+                  width: "20rem",
+                  padding: "1rem",
+                  border: "2px solid black",
+                }}
+              >
+                Vendor Details
+              </h4>
               <div class="table-responsive">
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>ID No.</th>
+                      <th>Sr No.</th>
                       <th>Store Name</th>
                       <th>E-Mail</th>
                       <th>Phone No.</th>
-
                       <th>Category</th>
-                      <th>Created On</th>
+                      <th>Created</th>
                       <th>Status</th>
+                      <th>Documents</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {vendorinfo.map((ele) => {
+                    {vendorinfo.map((ele, index) => {
                       return (
                         <tr>
-                          <td>{ele._id}</td>
+                          <td>{index + 1} </td>
                           <td>{ele.storeName}</td>
                           <td>{ele.email}</td>
                           <td>{ele.phoneNo}</td>
                           <td>{ele.categories}</td>
-                          <td>12 May 2017</td>
+                          <td>12/05/2017</td>
                           <td>
                             <label class="badge badge-danger">Pending</label>
                           </td>
