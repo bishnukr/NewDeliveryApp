@@ -217,9 +217,12 @@ body {
 
 .lefty {
   width: 20%;
+  height: 100vh;
 }
 .righty {
   width: 80%;
+  height: 100vh;
+  overflow: scroll;
 }
 .txty {
   display: flex;

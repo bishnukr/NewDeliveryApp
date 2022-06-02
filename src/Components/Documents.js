@@ -1,6 +1,6 @@
 import SideNav from "./SideNav";
 import { React, useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import jle12 from "./jle12.png";
@@ -8,17 +8,29 @@ import jle12 from "./jle12.png";
 function Documents() {
   const history = useNavigate();
   const userLogin = useSelector((state) => state.userLogin);
-  const vendorInfo = localStorage.getItem("vendorInfo")
-    ? JSON.parse(localStorage.getItem("vendorInfo"))
-    : "";
   const { userInfo } = userLogin;
-  const [vendordata, setVendordata] = useState("");
-  const [vendorinfo, setVendorinfo] = useState([]);
+  const vendordata = useParams().Id;
+  console.log(vendordata, "111");
+  const [vendorInfo, setVendorInfo] = useState({
+    address: {
+      streetName: "",
+      city: "",
+    },
+  });
   useEffect(async (e) => {
     if (!userInfo) {
       history("/");
     }
-    setVendordata(vendorInfo);
+    const config = {
+      headers: {
+        authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.get(
+      `/api/admin/viewParticularVendor/${vendordata}`,
+      config
+    );
+    setVendorInfo(data.vendor);
   }, []);
   const handleApproval = async (e) => {
     const config = {
@@ -27,7 +39,7 @@ function Documents() {
       },
     };
     const { data } = await axios.post(
-      `/api/admin/approveVendors/${vendordata._id}`,
+      `/api/admin/approveVendors/${vendordata}`,
       {},
       config
     );
@@ -39,7 +51,7 @@ function Documents() {
       },
     };
     const { data } = await axios.post(
-      `/api/admin/disapproveVendors/${vendordata._id}`,
+      `/api/admin/viewdisapproveVendor/${vendordata}`,
       {},
       config
     );

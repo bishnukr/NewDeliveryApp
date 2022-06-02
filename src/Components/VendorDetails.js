@@ -20,7 +20,9 @@ function VendorDetails() {
     };
     const { data } = await axios.get(`/api/admin/viewVendors`, config);
     setVendorinfo(data.vendors);
+    console.log(vendorinfo);
   }, []);
+
   return (
     <div className="main">
       <div className="lefty">
@@ -28,9 +30,7 @@ function VendorDetails() {
       </div>
       {/* all-data */}
       <div className="righty  page-content page-container" id="page-content">
-        {/* <div class="padding"> */}
         <div class="row container d-flex justify-content-center">
-          {/* <div class="col-lg-8 grid-margin stretch-card"> */}
           <div class="card">
             <div class="card-body">
               <h4 class="card-title">Customer Details</h4>
@@ -65,13 +65,7 @@ function VendorDetails() {
                           <td>
                             <button
                               class="badge badge-danger"
-                              onClick={() => {
-                                localStorage.setItem(
-                                  "vendorInfo",
-                                  JSON.stringify(ele)
-                                );
-                                // history("/vendorInfo");
-                              }}
+                              onClick={() => history(`/vendorInfo/${ele._id}`)}
                             >
                               View Documents
                             </button>
@@ -199,8 +193,6 @@ function VendorDetails() {
         </div>
       </div>
     </div>
-    // </div>
-    // </div>
   );
 }
 
